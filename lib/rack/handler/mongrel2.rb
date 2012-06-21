@@ -43,11 +43,12 @@ module Rack
                     'PATH_INFO'           => req.headers['PATH'].gsub(script_name, ''),
                     'QUERY_STRING'        => req.headers['QUERY'] || '' }
 
-            env['SERVER_NAME'], env['SERVER_PORT'] = req.headers['host'].split(':', 2)
+            env['SERVER_NAME'], env['SERVER_PORT'] = req.headers['host'].to_s.split(':', 2)
             env['SERVER_PORT'] ||= '80'
+            env['SERVER_NAME'] = 'localhost' if !env['SERVER_NAME'] || env['SERVER_NAME'].empty?
             
             req.headers.each do |key, val|
-              unless key =~ /content_(type|length)/i
+              unless key =~ /content-(type|length)/i
                 key = "HTTP_#{key.upcase.gsub('-', '_')}"
               end
               env[key] = val
