@@ -10,7 +10,7 @@ module Mongrel2
         uuid, conn_id, path, rest = msg.split(' ', 4)
         headers, rest = parse_netstring(rest)
         body, _ = parse_netstring(rest)
-        headers = Mongrel2::JSON.parse(headers)
+        headers = flatten_values(Mongrel2::JSON.parse(headers))
         new(uuid, conn_id, path, headers, body)
       end
 
@@ -21,6 +21,15 @@ module Mongrel2
         len = len.to_i
         raise "Netstring did not end in ','" unless rest[len].chr == ','
         [rest[0, len], rest[(len + 1)..-1]]
+      end
+      
+      def flatten_values(headers)
+        headers.each do
+          |k,v|
+          if v.kind_of? Array
+            headers[k] = v.join ", "
+          end
+        end
       end
     end
 

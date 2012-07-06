@@ -10,6 +10,7 @@ module Helpers
     conn.stub(:reply) {nil}
     Mongrel2::Connection.stub(:new) { conn }
 
+    # Wrap a dummy app with two Lint guards (before and after)
     app = lambda {|e| return 200, {"content-type"=>"text/crap"}, [""]}
     app = Rack::Lint.new app
     app = Rack::Lint.new app
