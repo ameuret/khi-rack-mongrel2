@@ -16,7 +16,7 @@ module Rack
         running = true
         graceful_shutdown = false
 
-        %w(INT TERM KILL).each do | sig |
+        %w(INT TERM).each do | sig |
           Signal.trap(sig) do
             running = false
             graceful_shutdown = (sig == 'TERM')
