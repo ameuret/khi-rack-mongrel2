@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   ## If your rubyforge_project name is different, then edit it and comment out
   ## the sub! line in the Rakefile
   s.name              = 'khi-rack-mongrel2'
-  s.version           = '1.0.3'
-  s.date              = '2011-05-21'
+  s.version           = '1.0.4'
+  s.date              = '2015-11-06'
   s.rubyforge_project = 'khi-rack-mongrel2'
 
   ## Make sure your summary is short. The description may be as long
@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
 
   ## List your runtime dependencies here. Runtime dependencies are those
   ## that are needed for an end user to actually USE your code.
-  s.add_dependency('zmq', ['~> 2.1.0.1'])
+  s.add_dependency('zmq', ['~> 2'])
 
   ## List your development dependencies here. Development dependencies are
   ## those that are only needed during development
@@ -69,6 +69,7 @@ Gem::Specification.new do |s|
     lib/mongrel2/request.rb
     lib/mongrel2/response.rb
     lib/rack/handler/mongrel2.rb
+    spec/handler_spec.rb
     spec/request_spec.rb
     spec/response_spec.rb
     spec/spec_helper.rb
